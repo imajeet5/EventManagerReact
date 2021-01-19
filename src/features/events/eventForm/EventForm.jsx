@@ -4,9 +4,9 @@ import { Button, Form, Header, Segment } from 'semantic-ui-react';
 
 export default function EventForm({
   setFormOpen,
-  setEvents,
   createEvent,
   selectedEvent,
+  updatedEvent,
 }) {
   const initialValues = selectedEvent ?? {
     title: '',
@@ -21,18 +21,24 @@ export default function EventForm({
 
   useEffect(() => {
     setValues(initialValues);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedEvent]);
 
   function handleFormSubmit(e) {
     e.preventDefault();
-    createEvent({
-      ...values,
-      id: cuid(),
-      hostedBy: 'Bob',
-      attendees: [],
-      hostPhotoURL: '/assets/user.png',
-    });
+
+    if (selectedEvent) {
+      updatedEvent({ ...selectedEvent, ...values });
+    } else {
+      createEvent({
+        ...values,
+        id: cuid(),
+        hostedBy: 'Bob',
+        attendees: [],
+        hostPhotoURL: '/assets/user.png',
+      });
+    }
+
     setFormOpen(false);
   }
 
@@ -43,7 +49,9 @@ export default function EventForm({
 
   return (
     <Segment clearing>
-      <Header content="Create new event" />
+      <Header
+        content={selectedEvent ? 'Edit the event' : 'Create a new event'}
+      />
       <Form onSubmit={handleFormSubmit}>
         <Form.Field>
           <input
