@@ -7,8 +7,10 @@ import EventForm from '../../features/events/eventForm/EventForm';
 import HomePage from '../../features/home/HomePage';
 import NavBar from '../../features/nav/NavBar';
 import Sandbox from '../sandbox/Sandbox';
+import useScrollToTop from './ScrollToTop';
 
 function App() {
+  useScrollToTop();
   // /(.+) this mean anything that has forward slash and and something else
   return (
     <Fragment>
