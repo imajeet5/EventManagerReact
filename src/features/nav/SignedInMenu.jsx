@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Dropdown, Image, Menu } from 'semantic-ui-react';
 
-export default function SignedInMenu({ setAuthenticated }) {
+export default function SignedInMenu({ signOut }) {
   return (
     <Menu.Item position="right">
       <Image avatar spaced="right" src="/assets/user.png" />
@@ -16,7 +16,7 @@ export default function SignedInMenu({ setAuthenticated }) {
           />
           <Dropdown.Item text="My Profile" icon="user" />
           <Dropdown.Item
-            onClick={() => setAuthenticated(false)}
+            onClick={() => signOut()}
             text="Sign out"
             icon="power"
           />
